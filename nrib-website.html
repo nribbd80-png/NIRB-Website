@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NRIB — Nutrition Research & Information Bangladesh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a5c2e;
+    --green-mid: #2d8a4e;
+    --green-light: #4caf74;
+    --green-pale: #e8f5ed;
+    --green-mist: #f2faf5;
+    --cream: #fdfaf6;
+    --text-dark: #1a2a1e;
+    --text-mid: #3d5a44;
+    --text-light: #6b8a72;
+    --white: #ffffff;
+    --border: #c8e0ce;
+    --gold: #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,250,246,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-circle {
+    width: 42px; height: 42px;
+    background: var(--green-deep);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  .logo-text {
+    display: flex; flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-text strong {
+    font-size: 14px; font-weight: 600; color: var(--green-deep); letter-spacing: 0.3px;
+  }
+
+  .logo-text span {
+    font-size: 10px; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.2px;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1.5px; background: var(--green-mid);
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-deep); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: var(--green-deep);
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--green-mid) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .hero-bg-shape {
+    position: absolute; top: -100px; right: -150px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c8e8d440 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-bg-leaf {
+    position: absolute; bottom: 0; left: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #e8f5ed60 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid);
+    background: var(--green-pale);
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--green-light); border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .hero-sub {
+    font-size: 16px; color: var(--text-mid);
+    max-width: 460px;
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green-deep);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1.5px solid var(--green-deep);
+    color: var(--green-deep);
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--green-pale); }
+
+  .hero-stats {
+    display: flex; gap: 28px; margin-top: 44px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--green-deep);
+  }
+  .stat-label { font-size: 12px; color: var(--text-light); letter-spacing: 0.3px; }
+
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  .hero-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 20px rgba(26,92,46,0.06);
+    transition: transform 0.2s;
+  }
+
+  .hero-card:hover { transform: translateY(-2px); }
+
+  .hero-card-icon {
+    font-size: 28px; margin-bottom: 10px;
+  }
+
+  .hero-card h4 {
+    font-size: 15px; font-weight: 600; color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .hero-card p { font-size: 13px; color: var(--text-light); }
+
+  .hero-card-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 12px; display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700; color: var(--text-dark);
+    line-height: 1.2; margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px; color: var(--text-mid);
+    max-width: 580px; line-height: 1.8;
+  }
+
+  .section-header { margin-bottom: 52px; }
+
+  .inner { max-width: 1100px; margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--green-mist); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: start;
+  }
+
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-style: italic;
+    color: var(--green-deep);
+    border-left: 3px solid var(--green-light);
+    padding-left: 20px;
+    margin: 28px 0;
+    line-height: 1.6;
+  }
+
+  .about-text p {
+    color: var(--text-mid); font-size: 15px; line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .pillars {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  .pillar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+
+  .pillar-icon {
+    width: 44px; height: 44px;
+    background: var(--green-pale);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+
+  .pillar h4 { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .pillar p { font-size: 13.5px; color: var(--text-light); }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--cream); }
+
+  .research-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .research-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .research-card:hover {
+    box-shadow: 0 8px 32px rgba(26,92,46,0.10);
+    transform: translateY(-3px);
+  }
+
+  .research-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    background: var(--green-pale);
+    padding: 4px 10px; border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .research-card h3 {
+    font-size: 16px; font-weight: 600; color: var(--text-dark);
+    margin-bottom: 10px; line-height: 1.4;
+  }
+
+  .research-card p {
+    font-size: 13.5px; color: var(--text-light); line-height: 1.7;
+  }
+
+  .research-card-footer {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-light);
+  }
+
+  /* ── PROGRAMS ── */
+  #programs { background: var(--green-deep); }
+
+  #programs .section-label { color: var(--green-light); }
+  #programs .section-title { color: white; }
+  #programs .section-desc { color: rgba(255,255,255,0.7); }
+
+  .program-featured {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+
+  .program-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold);
+    color: white;
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .program-featured h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: white;
+    margin-bottom: 12px;
+  }
+
+  .program-featured p {
+    color: rgba(255,255,255,0.75);
+    font-size: 15px; line-height: 1.8;
+    max-width: 620px; margin-bottom: 28px;
+  }
+
+  .weeks-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; margin-top: 28px;
+  }
+
+  .week-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .week-num {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    color: var(--green-light); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .week-card h4 {
+    font-size: 13.5px; font-weight: 500; color: white; line-height: 1.4;
+  }
+
+  .program-meta {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px;
+  }
+
+  .meta-item {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.8); font-size: 13px;
+  }
+
+  .meta-icon { font-size: 16px; }
+
+  /* ── BLOG ── */
+  #blog { background: var(--cream); }
+
+  .blog-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .blog-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(26,92,46,0.09);
+  }
+
+  .blog-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+  }
+
+  .blog-img.c1 { background: linear-gradient(135deg, #e8f5ed, #c8e8d4); }
+  .blog-img.c2 { background: linear-gradient(135deg, #fdf3e7, #f5ddb5); }
+  .blog-img.c3 { background: linear-gradient(135deg, #e8f0fd, #c8d8f8); }
+
+  .blog-body { padding: 22px; }
+
+  .blog-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 10px; display: block;
+  }
+
+  .blog-card h3 {
+    font-size: 16px; font-weight: 600; color: var(--text-dark);
+    line-height: 1.4; margin-bottom: 10px;
+  }
+
+  .blog-card p { font-size: 13.5px; color: var(--text-light); line-height: 1.7; }
+
+  .blog-footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-light);
+    display: flex; justify-content: space-between;
+  }
+
+  /* ── TEAM ── */
+  .team-section { background: var(--green-mist); padding: 90px 5%; }
+
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .team-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .team-card:hover { transform: translateY(-3px); }
+
+  .team-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-pale), var(--green-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin: 0 auto 16px;
+    border: 3px solid var(--border);
+  }
+
+  .team-card h4 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .team-card .role { font-size: 12px; color: var(--green-mid); font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
+  .team-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--cream); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 60px; align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+
+  .contact-info p {
+    font-size: 15px; color: var(--text-mid); line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .contact-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .contact-item-icon {
+    width: 40px; height: 40px;
+    background: var(--green-pale);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .contact-item h5 { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+  .contact-item p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+  .contact-form {
+    background: white; border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--text-dark); margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px; font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--green-mid); }
+
+  .form-group textarea { height: 110px; resize: vertical; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--green-deep);
+    color: white; border: none;
+    padding: 13px; border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--green-mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.6);
+    padding: 52px 5% 28px;
+  }
+
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 40px;
+  }
+
+  .footer-brand p {
+    font-size: 13.5px; line-height: 1.8; margin-top: 14px;
+    max-width: 260px;
+  }
+
+  .footer-logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .footer-logo-circle {
+    width: 36px; height: 36px;
+    background: var(--green-mid);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: white;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .footer-logo strong { color: white; font-size: 14px; }
+
+  .footer-col h5 {
+    color: white; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.3px; margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li { margin-bottom: 10px; }
+
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none; font-size: 13.5px;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: var(--green-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12.5px;
+  }
+
+  .footer-bottom p { color: rgba(255,255,255,0.4); }
+
+  .tagline {
+    color: var(--green-light) !important;
+    font-style: italic;
+  }
+
+  /* ── MISSION BANNER ── */
+  .mission-banner {
+    background: var(--green-pale);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 40px;
+    text-align: center;
+    margin-top: 52px;
+  }
+
+  .mission-banner p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-style: italic;
+    color: var(--green-deep); line-height: 1.6;
+  }
+
+  /* mobile hamburger placeholder */
+  .hamburger { display: none; }
+
+  @media (max-width: 900px) {
+    .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .research-grid, .blog-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+    .weeks-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: block; font-size: 22px; background: none; border: none; cursor: pointer; color: var(--green-deep); }
+    .hero-visual { display: none; }
+  }
+
+  @media (max-width: 580px) {
+    .research-grid, .blog-grid, .team-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .weeks-grid { grid-template-columns: 1fr; }
+  }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="logo-circle">NRIB</div>
+    <div class="logo-text">
+      <strong>Nutrition Research & Information</strong>
+      <span>Bangladesh</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" onclick="alert('Menu: Home | About | Research | Programs | Blog | Contact')">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-leaf"></div>
+  <div class="hero-inner">
+    <div class="hero-content reveal">
+      <div class="hero-eyebrow">Est. January 2026 · Dhaka, Bangladesh</div>
+      <h1 class="hero-title">
+        Bridging <em>Science</em><br>& Public Health<br>in Bangladesh
+      </h1>
+      <p class="hero-sub">
+        NRIB is a youth-led, research-oriented platform that translates complex nutrition science into accessible knowledge for every Bangladeshi.
+      </p>
+      <div class="hero-actions">
+        <a href="#programs" class="btn-primary">Explore Our Programs</a>
+        <a href="#about" class="btn-outline">Learn About Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">4+</span>
+          <span class="stat-label">Active Programs</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">139+</span>
+          <span class="stat-label">Community Members</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2026</span>
+          <span class="stat-label">Founded</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-card">
+        <div class="hero-card-icon">🥗</div>
+        <h4>Evidence-Based Nutrition</h4>
+        <p>Science-backed information on healthy eating, translated into plain language for everyone.</p>
+      </div>
+      <div class="hero-card-row">
+        <div class="hero-card">
+          <div class="hero-card-icon">🔬</div>
+          <h4>Research</h4>
+          <p>Rigorous studies on public nutrition in Bangladesh.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">🤝</div>
+          <h4>Community</h4>
+          <p>Connecting youth, experts & institutions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title">Research for Knowledge,<br>Nutrition for Life.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Nutrition Research & Information Bangladesh (NRIB) is a youth-led, research-oriented platform established to promote evidence-based nutrition knowledge, public health awareness, and a strong research culture in Bangladesh.</p>
+        <blockquote class="about-quote">
+          "If the knowledge produced in research laboratories never reaches ordinary people, that knowledge has no real value."
+        </blockquote>
+        <p>Founded on 24 January 2026 by <strong>Mst. Mahfuza Akter</strong>, NRIB aims to bridge the gap between scientific research and the general public by translating complex nutrition and health information into accessible, understandable content.</p>
+        <p>Through research, training, scientific communication, and community engagement, NRIB strives to empower individuals to make informed decisions about nutrition and healthy lifestyles.</p>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar">
+          <div class="pillar-icon">🔬</div>
+          <div>
+            <h4>Research</h4>
+            <p>Conducting and supporting evidence-based nutrition and public health research initiatives across Bangladesh.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📚</div>
+          <div>
+            <h4>Education</h4>
+            <p>Building research capacity among students and young professionals through training, mentorship, and workshops.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📢</div>
+          <div>
+            <h4>Awareness</h4>
+            <p>Disseminating scientific findings in a simple and accessible manner to promote healthy dietary practices.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div>
+            <h4>Collaboration</h4>
+            <p>Fostering partnerships with academic institutions, healthcare organizations, and community stakeholders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Our Research</span>
+      <h2 class="section-title">Evidence That Drives<br>Real Change</h2>
+      <p class="section-desc">NRIB focuses on research areas that directly impact the health and well-being of Bangladeshi communities.</p>
+    </div>
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <span class="research-tag">Body Image</span>
+        <h3>Body Image Dissatisfaction Among Bangladeshi Youth</h3>
+        <p>Exploring the psychological and social factors contributing to negative body image perceptions among young people aged 16–30, with a focus on social media's role.</p>
+        <div class="research-card-footer">🗓 2026 · Ongoing</div>
+      </div>
+      <div class="research-card reveal">
+        <span class="research-tag">Eating Disorders</span>
+        <h3>Eating Disorder Risk Among University Students</h3>
+        <p>Assessing the prevalence and determinants of disordered eating attitudes and behaviors among Bangladeshi university students using validated EAT-26 tools.</p>
+        <div class="research-card-footer">🗓 2026 · Ongoing</div>
+      </div>
+      <div class="research-card reveal">
+        <span class="research-tag">Public Health</span>
+        <h3>Nutrition Knowledge & Dietary Habits in Rural Bangladesh</h3>
+        <p>Investigating nutrition literacy levels and their relationship with dietary practices in rural Bangladeshi communities to inform targeted interventions.</p>
+        <div class="research-card-footer">🗓 2026 · Planning</div>
+      </div>
+    </div>
+    <div class="mission-banner reveal">
+      <p>"To become a trusted national platform for nutrition research, education, and public health awareness — contributing to a healthier, well-informed, and nutritionally empowered Bangladesh."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Current Programs</span>
+      <h2 class="section-title">Learning Together,<br>Growing Together</h2>
+      <p class="section-desc">Our programs are designed to create real, lasting change in how young Bangladeshis relate to their bodies, food, and mental health.</p>
+    </div>
+
+    <div class="program-featured reveal">
+      <div class="program-badge">⭐ Featured Program</div>
+      <h3>Positive Body, Healthy Mind</h3>
+      <p>A 4-week online awareness and support program helping young people aged 16–30 build a healthier relationship with their bodies, food, and themselves. Because your body is more than just how it looks.</p>
+
+      <div class="program-meta">
+        <div class="meta-item"><span class="meta-icon">📅</span> Jun 12 – Jul 3, 2026</div>
+        <div class="meta-item"><span class="meta-icon">⏰</span> 8:00–9:00 PM</div>
+        <div class="meta-item"><span class="meta-icon">💻</span> Zoom (Online)</div>
+        <div class="meta-item"><span class="meta-icon">👥</span> Ages 16–30 · Open to all Bangladesh</div>
+        <div class="meta-item"><span class="meta-icon">✅</span> Free to join · Safe & Confidential</div>
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-num">Week 1 · Jun 12</div>
+          <h4>Understanding Body Image: Building a Healthy Relationship with Yourself</h4>
+        </div>
+        <div class="week-card">
+          <div class="week-num">Week 2 · Jun 19</div>
+          <h4>Media Literacy & Social Pressure: Recognizing the Trap</h4>
+        </div>
+        <div class="week-card">
+          <div class="week-num">Week 3 · Jun 26</div>
+          <h4>Healthy Eating & Warning Signs to Watch</h4>
+        </div>
+        <div class="week-card">
+          <div class="week-num">Week 4 · Jul 3</div>
+          <h4>Body Appreciation & Self-Compassion</h4>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;">
+        <a href="#contact" class="btn-primary">Register via Facebook Page →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Blog & Insights</span>
+      <h2 class="section-title">Nutrition Knowledge,<br>Simply Explained</h2>
+      <p class="section-desc">Evidence-based articles, research summaries, and health tips — written for everyone, not just experts.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-img c1">🥦</div>
+        <div class="blog-body">
+          <span class="blog-tag">Body Image</span>
+          <h3>Why 37.6% of Bangladeshi University Students Are at Risk of Eating Disorders</h3>
+          <p>New research reveals alarming rates of disordered eating among young people — and what we can do about it.</p>
+        </div>
+        <div class="blog-footer"><span>Jun 2026</span><span>5 min read</span></div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img c2">📱</div>
+        <div class="blog-body">
+          <span class="blog-tag">Social Media & Health</span>
+          <h3>How Instagram Is Quietly Hurting the Mental Health of Bangladeshi Teens</h3>
+          <p>A growing body of research links social media use to body dissatisfaction — particularly among girls aged 15–18.</p>
+        </div>
+        <div class="blog-footer"><span>Jun 2026</span><span>4 min read</span></div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img c3">🧠</div>
+        <div class="blog-body">
+          <span class="blog-tag">Mental Wellbeing</span>
+          <h3>"Healthy Is Not a Size" — What the Research Really Says About Body Positivity</h3>
+          <p>Understanding the science behind self-compassion, body appreciation, and their impact on long-term health.</p>
+        </div>
+        <div class="blog-footer"><span>May 2026</span><span>6 min read</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<div class="team-section">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Our Team</span>
+      <h2 class="section-title">Led by Youth,<br>Driven by Purpose</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">👩‍🔬</div>
+        <h4>Mst. Mahfuza Akter</h4>
+        <div class="role">Founder & Executive Director</div>
+        <p>Visionary behind NRIB's mission to bridge nutrition science and public awareness across Bangladesh.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👩‍⚕️</div>
+        <h4>Mst. Sabrina Afroz</h4>
+        <div class="role">Program Moderator</div>
+        <p>BSc in Food and Nutrition, Government College of Applied Human Science. Leads awareness sessions.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">🤝</div>
+        <h4>Join Our Team</h4>
+        <div class="role">Volunteer & Researcher</div>
+        <p>We're always looking for passionate young researchers, writers, and health advocates to join our mission.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Let's Build a Healthier<br>Bangladesh Together</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>We'd love to hear from you.</h3>
+        <p>Whether you want to collaborate, participate in a program, contribute research, or simply learn more — reach out to us.</p>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <h5>Address</h5>
+            <p>Bosila, Mohammadpur, Dhaka-1207, Bangladesh</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📘</div>
+          <div>
+            <h5>Facebook Page</h5>
+            <p>Nutrition Research and Information Bangladesh</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🎯</div>
+          <div>
+            <h5>Mission</h5>
+            <p>Research for Knowledge, Nutrition for Life.</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Rafia Islam">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select>
+            <option>Join a Program</option>
+            <option>Research Collaboration</option>
+            <option>Volunteer Opportunity</option>
+            <option>Media Inquiry</option>
+            <option>General Query</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us how you'd like to get involved or what you'd like to know..."></textarea>
+        </div>
+        <button class="btn-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-circle">NRIB</div>
+        <strong>Nutrition Research & Information Bangladesh</strong>
+      </div>
+      <p>A youth-led platform bridging nutrition science and public health awareness across Bangladesh since January 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About NRIB</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Programs</h5>
+      <ul>
+        <li><a href="#programs">Positive Body, Healthy Mind</a></li>
+        <li><a href="#programs">Upcoming Programs</a></li>
+        <li><a href="#contact">Volunteer</a></li>
+        <li><a href="#contact">Collaborate</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Research Focus</h5>
+      <ul>
+        <li><a href="#research">Body Image</a></li>
+        <li><a href="#research">Eating Disorders</a></li>
+        <li><a href="#research">Public Nutrition</a></li>
+        <li><a href="#research">Mental Wellbeing</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Nutrition Research & Information Bangladesh (NRIB). All rights reserved.</p>
+    <p class="tagline">"Research for Knowledge, Nutrition for Life."</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green-deep)' : '';
+    });
+  });
+</script>
+</body>
+</html>
